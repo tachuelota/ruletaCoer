@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ruleta Simulacro Multipeligro - COER Moquegua</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="stage">
+    <div class="wheel-wrap">
+      <canvas id="wheel" aria-label="Ruleta interactiva"></canvas>
+    </div>
+
+    <button id="configBtn" class="config-btn" title="Configuración">⚙️</button>
+
+    <div class="controls">
+      <button id="spinBtn" class="btn">Girar</button>
+      <button id="viewWinners" class="btn ghost">Ver ganadores</button>
+      <button id="fullscreenBtn" class="btn small">Pantalla completa</button>
+    </div>
+  </div>
+
+  <!-- Vista previa (sin nombre) -->
+  <div id="previewOverlay" class="overlay hidden">
+    <div class="card preview-card">
+      <h2>🎯 ¡Resultado!</h2>
+      <p class="muted">¿Qué habrá ganado?</p>
+      <img id="previewImg" src="" alt="Preview" />
+      <div class="row">
+        <button id="revealBtnPreview" class="btn">🔍 Mostrar Respuesta</button>
+        <button id="closePreview" class="btn ghost">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Resultado completo (con nombre) -->
+  <div id="revealOverlay" class="overlay hidden">
+    <div class="card">
+      <h2 id="revealTitle">🎉 Resultado Ganador</h2>
+      <img id="revealImg" src="" alt="Resultado" />
+      <div class="row">
+        <button id="markWin" class="btn">Registrar Ganador</button>
+        <button id="closeReveal" class="btn ghost">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal configuración -->
+  <div id="configModal" class="modal hidden">
+    <div class="modal-content">
+      <span id="closeConfig" class="close-btn" title="Cerrar">&times;</span>
+      <h2>⚙️ Configuración de la Ruleta</h2>
+      <p class="muted">Personaliza los premios y casilleros de la ruleta</p>
+      
+      <!-- Selector de color de fondo -->
+      <div class="bg-color-section">
+        <label for="bgColorPicker">🎨 Color de fondo:</label>
+        <input type="color" id="bgColorPicker" value="#1a1a1a" />
+        <button id="resetBgColor" class="small ghost">Restablecer</button>
+      </div>
+      
+      <!-- Gestión de ganadores -->
+      <div class="winners-section">
+        <h3>🏆 Gestión de Ganadores</h3>
+        <div class="row">
+          <button id="exportWinners" class="small">📥 Exportar lista (CSV)</button>
+          <button id="clearWinners" class="small ghost">🗑️ Limpiar lista</button>
+        </div>
+      </div>
+      
+      <div class="muted" style="margin-top:8px">Formatos soportados: PNG, JPG, JPEG, WebP, SVG</div>
+      
+      <div style="margin-top:16px;" class="row">
+        <button id="addSlotBtn" class="btn small">➕ Agregar casillero</button>
+        <button id="clearBtn" class="small ghost">🗑️ Borrar todo</button>
+        <button id="exportBtn" class="small">💾 Exportar</button>
+        <button id="importBtn" class="small">📥 Importar</button>
+        <input id="importFile" type="file" accept="application/json" style="display:none" />
+      </div>
+      
+      <div id="slotsGrid" class="slots-grid"></div>
+      
+      <div style="margin-top:16px;display:flex;justify-content:flex-end;gap:8px">
+        <button id="saveConfig" class="btn">Guardar cambios</button>
+      </div>
+      
+      <p class="muted" style="margin-top:12px">
+        💡 Tip: Al agregar un casillero, se te pedirá el nombre del premio y luego seleccionarás la imagen.
+      </p>
+    </div>
+  </div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
